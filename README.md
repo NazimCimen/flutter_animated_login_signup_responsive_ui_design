@@ -3,7 +3,7 @@
 
 ## 📱 I am pleased to introduce animated responsive design
 
-You can explore my design in more detail through my YouTube channel: [https://example.com](https://www.nosyapi.com/)
+You can explore my design in more detail through my YouTube channel: [click here](https://www.youtube.com/watch?v=OLf0sk014GY)
 
 
 
