@@ -4,7 +4,7 @@ import 'package:uidesign/constants/constants.dart';
 import 'package:uidesign/widgets/button.dart';
 import 'package:uidesign/widgets/gradient_background.dart';
 import 'package:uidesign/views/log_in_view.dart';
-import 'package:uidesign/widgets/mail_textfield.dart';
+import 'package:uidesign/widgets/custom_textfield.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
@@ -23,13 +23,7 @@ class ForgotPassword extends StatelessWidget {
                 flex: 10,
                 child: FittedBox(
                   child: FadeInRight(
-                    child: const CircleAvatar(
-                      backgroundColor: Color(0xccF5CCA0), //burası txt3
-                      child: Icon(
-                        Icons.question_mark_outlined,
-                        color: Color(0xff994D1C),
-                      ),
-                    ),
+                    child: buildCircleAvatar(),
                   ),
                 ),
               ),
@@ -38,9 +32,7 @@ class ForgotPassword extends StatelessWidget {
                 flex: 13,
                 child: FittedBox(
                   child: FadeInLeft(
-                    child: Text(
-                        style: myTextStyle,
-                        'Just give us the email address\nyou used to create your account\n and we will send you an email\n to make a new password.'),
+                    child: buildText(),
                   ),
                 ),
               ),
@@ -50,7 +42,12 @@ class ForgotPassword extends StatelessWidget {
                   child: FractionallySizedBox(
                       heightFactor: 0.8,
                       widthFactor: 0.8,
-                      child: FadeInRight(child: const EmailTextField()))),
+                      child: FadeInRight(
+                          child: const CustomTextField(
+                        type: TextInputType.emailAddress,
+                        hint: 'email',
+                        icon: Icons.email_outlined,
+                      )))),
               const Spacer(flex: 1),
               Expanded(
                   flex: 15,
@@ -59,7 +56,7 @@ class ForgotPassword extends StatelessWidget {
                         heightFactor: 0.5,
                         widthFactor: 0.8,
                         child: FadeInLeft(
-                            child: MyButtons(
+                            child: MyButton(
                           text: 'Send Email',
                           onPressed: () {
                             Navigator.push(
@@ -74,20 +71,7 @@ class ForgotPassword extends StatelessWidget {
                 flex: 10,
                 child: FittedBox(
                   child: FadeInRight(
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => LogIn()));
-                        },
-                        child: Row(
-                          children: [
-                            const Icon(Icons.chevron_left_outlined,
-                                color: Color(0xff994D1C)),
-                            FittedBox(
-                                child: Text('back to Log in',
-                                    style: myTextStyle.copyWith(fontSize: 14))),
-                          ],
-                        )),
+                    child: buildTextButton(context),
                   ),
                 ),
               ),
@@ -95,6 +79,38 @@ class ForgotPassword extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  TextButton buildTextButton(BuildContext context) {
+    return TextButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LogIn()));
+        },
+        child: Row(
+          children: [
+            Icon(Icons.chevron_left_outlined, color: myColorTxt5),
+            FittedBox(
+                child: Text('back to Log in',
+                    style: myTextStyle.copyWith(fontSize: 14))),
+          ],
+        ));
+  }
+
+  Text buildText() {
+    return Text(
+        style: myTextStyle,
+        'Just give us the email address\nyou used to create your account\n and we will send you an email\n to make a new password.');
+  }
+
+  CircleAvatar buildCircleAvatar() {
+    return CircleAvatar(
+      backgroundColor: myColor3,
+      child: Icon(
+        Icons.question_mark_outlined,
+        color: myColorTxt5,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uidesign/constants/constants.dart';
 
 class GradientBackgroundContainer extends StatelessWidget {
   const GradientBackgroundContainer({
@@ -10,15 +11,15 @@ class GradientBackgroundContainer extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-            Color(0x66F5CCA0),
-            Color(0x99F5CCA0),
-            Color(0xccF5CCA0),
-            Color(0xffF5CCA0),
+            myColor1,
+            myColor2,
+            myColor3,
+            myColor4,
           ])),
     );
   }

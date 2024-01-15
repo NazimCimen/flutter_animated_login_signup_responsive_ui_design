@@ -6,7 +6,7 @@ import 'package:uidesign/views/sign_up_view.dart';
 import 'package:uidesign/widgets/button.dart';
 import 'package:uidesign/views/forgot_password_view.dart';
 import 'package:uidesign/widgets/gradient_background.dart';
-import 'package:uidesign/widgets/mail_textfield.dart';
+import 'package:uidesign/widgets/custom_textfield.dart';
 import 'package:uidesign/widgets/password_textfield.dart';
 import 'package:uidesign/views/home.dart';
 
@@ -31,6 +31,7 @@ class _LogInState extends State<LogIn> {
       _afterLoginAnimate = true;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +46,7 @@ class _LogInState extends State<LogIn> {
                 flex: 10,
                 child: FittedBox(
                   child: FadeInRight(
-                    child: Text(
-                      'Welcome!',
-                      style: myTextStyle,
-                    ),
+                    child: buildText('Welcome!'),
                   ),
                 ),
               ),
@@ -61,9 +59,8 @@ class _LogInState extends State<LogIn> {
                       widthFactor: 0.8,
                       child: FittedBox(
                         child: FadeInLeft(
-                          child: Text(
-                              'Discover all the events that interest you!',
-                              style: myTextStyle),
+                          child: buildText(
+                              'Discover all the events that interest you!'),
                         ),
                       ),
                     ),
@@ -74,7 +71,12 @@ class _LogInState extends State<LogIn> {
                   child: FractionallySizedBox(
                       heightFactor: 0.8,
                       widthFactor: 0.8,
-                      child: FadeInRight(child: EmailTextField()))),
+                      child: FadeInRight(
+                          child: CustomTextField(
+                        type: TextInputType.emailAddress,
+                        hint: 'email',
+                        icon: Icons.email_outlined,
+                      )))),
               const Spacer(flex: 2),
               Expanded(
                   flex: 10,
@@ -97,7 +99,7 @@ class _LogInState extends State<LogIn> {
                     heightFactor: 0.5,
                     widthFactor: 0.8,
                     child: FadeInLeft(
-                        child: MyButtons(
+                        child: MyButton(
                       text: 'Log in',
                       onPressed: () async {
                         _animateAfterLogin();
@@ -117,17 +119,7 @@ class _LogInState extends State<LogIn> {
                       width: 25,
                       height: 25,
                       child: FittedBox(
-                        child: Visibility(
-                            visible: _afterLoginAnimate,
-                            child: _afterLoginAnimate == true
-                                ? SpinKitThreeBounce(
-                                    color: myColorTxt5,
-                                    size: 24,
-                                  )
-                                : SizedBox(
-                                    width: 2,
-                                    height: 2,
-                                  )),
+                        child: buildVisibilityWidgetForAnimation(),
                       ),
                     ),
                   )),
@@ -135,24 +127,7 @@ class _LogInState extends State<LogIn> {
                 flex: 5,
               ),
               Expanded(
-                  flex: 3,
-                  child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => SignUpView())));
-                      },
-                      child: FittedBox(
-                          child: Row(
-                        children: [
-                          Text(
-                            'Do not have any account?',
-                            style: myTextStyle,
-                          ),
-                          Text(' Sign up', style: myTextStyle),
-                        ],
-                      )))),
+                  flex: 3, child: buildInkwellNavigateToSigupPage(context)),
               const Spacer(
                 flex: 4,
               ),
@@ -160,6 +135,46 @@ class _LogInState extends State<LogIn> {
           )
         ],
       ),
+    );
+  }
+
+  InkWell buildInkwellNavigateToSigupPage(BuildContext context) {
+    return InkWell(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: ((context) => SignUpView())));
+        },
+        child: FittedBox(
+            child: Row(
+          children: [
+            Text(
+              'Do not have any account?',
+              style: myTextStyle,
+            ),
+            Text(' Sign up',
+                style: myTextStyle.copyWith(fontWeight: FontWeight.bold)),
+          ],
+        )));
+  }
+
+  Visibility buildVisibilityWidgetForAnimation() {
+    return Visibility(
+        visible: _afterLoginAnimate,
+        child: _afterLoginAnimate == true
+            ? SpinKitThreeBounce(
+                color: myColorTxt5,
+                size: 24,
+              )
+            : SizedBox(
+                width: 2,
+                height: 2,
+              ));
+  }
+
+  Text buildText(String text) {
+    return Text(
+      text,
+      style: myTextStyle,
     );
   }
 

@@ -13,25 +13,25 @@ class PasswordTextField extends StatelessWidget {
       autofillHints: const [AutofillHints.password],
       keyboardType: TextInputType.visiblePassword,
       obscureText: isSecure,
-      cursorColor: Color(0xff994D1C),
+      cursorColor: myColorTxt5,
       style: myTextStyle.copyWith(color: myColorTxt5, fontSize: 20),
       decoration: InputDecoration(
-        enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff994D1C), width: 2),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: myColorTxt5, width: 2),
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(width: 2, color: Color(0xff994D1C))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(width: 2, color: myColorTxt5)),
         labelText: 'password',
-        labelStyle: const TextStyle(color: Color(0xff994D1C), fontSize: 18),
-        prefixIcon: const Icon(Icons.lock_outlined, color: Color(0xff994D1C)),
+        labelStyle: TextStyle(color: myColorTxt5, fontSize: 18),
+        prefixIcon: Icon(Icons.lock_outlined, color: myColorTxt5),
         suffixIcon: IconButton(
             onPressed: changeLoading,
             icon: Icon(
                 isSecure
                     ? Icons.visibility_off_outlined
                     : Icons.visibility_outlined,
-                color: Color(0xff994D1C))),
+                color: myColorTxt5)),
       ),
     );
   }
